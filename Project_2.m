@@ -121,6 +121,7 @@ dpred = G*mest % [s] predicted data
 resid = dd-dpred; % [s], residual between observed and predicted data
 L2 = sqrt(resid'*resid)
 R=Vp*Vp.'
+S=Up*Up.'
 unce_d_2=[uncer_displa(1,1)^2 uncer_displa(1,2)^2 uncer_displa(1,3)^2 uncer_displa(1,4)^2 uncer_displa(1,5)^2 uncer_displa(1,6)^2];%
 disp("The units of unce_d_2 are (mm/yr)^2 ")
 cov_d=diag(unce_d_2)
@@ -137,12 +138,14 @@ xlabel('Stations','FontSize', 18);
 ylabel('Displacement rate [m/year]','FontSize', 18);
 title(['Surface displacement up using S=1, L2 Norm = ',num2str(L2),' [m]']);
 
-figure,imagesc(S)
-title('Matrix S');
-colorbar
-
-figure,imagesc(R)
+figure,
+subplot(2,1,1)
+imagesc(R)
 title('Matrix resolution using S=1');
+colorbar
+subplot(2,1,2)
+imagesc(S)
+title('Matrix S,Data resolution S=1');
 colorbar
 
 figure,imagesc(cov_m)
